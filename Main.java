@@ -1,6 +1,16 @@
+//
+// Programación orientada a objetos
+// Sección 20
+// Ejercicio 1
+// 
+// Hugo Méndez - 241265
+// Diego Calderón = 241263
+//
+
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
         // Inicializar el sistema e ingresar los datos de 4 salones
         for (int i = 0; i < 4; i++) {
