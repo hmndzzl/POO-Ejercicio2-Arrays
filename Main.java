@@ -13,7 +13,7 @@ public class Main {
         int costoSalon;
 
         // Crear una instancia de la clase Scanner
-        Scanner scanner1 = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         // Mensaje para los empleados del centro (usuarios del sistema)
         System.out.println("A continuación deberá ingresar los datos de 4 salones disponibles para ser reservados: ");
@@ -21,13 +21,13 @@ public class Main {
         for (int i = 1; i < 5; i++) {
             // Pedir el nombre del salón al usuario
             System.out.printf("Ingrese el nombre del salón %d: ", i);
-            nombreSalon = scanner1.nextLine();
+            nombreSalon = scanner.nextLine();
 
             // Pedir la capacidad del salón al usuario
             do {
                 System.out.printf("Ingrese la capacidad máxima del salón %d: ", i);
-                capSalon = scanner1.nextInt();
-                scanner1.nextLine(); // Consumir el salto de línea restante
+                capSalon = scanner.nextInt();
+                scanner.nextLine(); // Consumir el salto de línea restante
 
                 if (capSalon >= 500) {
                     tipoSalon = "Grande";
@@ -46,8 +46,8 @@ public class Main {
             invalido = true;
             do {
                 System.out.printf("Ingrese el costo por hora del salón %d: ", i);
-                costoSalon = scanner1.nextInt();
-                scanner1.nextLine(); // Consumir el salto de línea restante
+                costoSalon = scanner.nextInt();
+                scanner.nextLine(); // Consumir el salto de línea restante
 
                 if (costoSalon < 0) {
                     System.out.println("Costo inválido. Ingrese un valor positivo.");
@@ -59,11 +59,7 @@ public class Main {
 
             // Agregar los salones al Array
             salones[i - 1] = new Salon(nombreSalon, tipoSalon, capSalon, costoSalon); // El número de salón es su index
-            System.out.print("\n");
         }
-
-        // Cerrar el scanner
-        scanner1.close();
 
         // ---------------------------------------------MENÚ------------------------------------------------
 
@@ -80,14 +76,13 @@ public class Main {
                     5) Salir.
                 """;
 
-        Scanner scanner2 = new Scanner(System.in);
         int opcion;
         do {
             System.out.println(menu);
             System.out.print("Opción: ");
 
-            opcion = scanner2.nextInt();
-            scanner2.nextLine();
+            opcion = scanner.nextInt();
+            scanner.nextLine();
 
             // Verificar que el usuario ingrese una opción dentro de las posibles.
             if (opcion < 1 || opcion > 5) {
@@ -104,7 +99,7 @@ public class Main {
                 }
             } else if (opcion == 2) { // Recibir solicitud de reserva
                 System.out.print("Ingrese a nombre de quién se desea realizar la reservación: ");
-                String encargadoSol = scanner2.nextLine();
+                String encargadoSol = scanner.nextLine();
 
                 System.out.print("Ingrese el nombre del salón que desea reservar de la siguiente lista: ");
                 // Imprimir los salones
@@ -114,7 +109,7 @@ public class Main {
                             salones[i].getCosto(), i);
                 }
 
-                String nombreSol = scanner2.nextLine().toLowerCase();
+                String nombreSol = scanner.nextLine().toLowerCase();
 
                 // Verificar que el salón se encuentre en el array
                 // Utilizo Do While para no utilizar for - break
@@ -135,54 +130,54 @@ public class Main {
                 // Solicitar la fecha de reservación en formato LocalDateTime
                 System.out.println("Ingrese la fecha de reservación en el siguiente formato: ");
                 System.out.println("Año (AAAA): ");
-                int anioSol = scanner2.nextInt();
-                scanner2.nextLine();
+                int anioSol = scanner.nextInt();
+                scanner.nextLine();
 
                 System.out.println("Mes (MM): ");
-                int mesSol = scanner2.nextInt();
-                scanner2.nextLine();
+                int mesSol = scanner.nextInt();
+                scanner.nextLine();
 
                 System.out.println("Día (dd): ");
-                int diaSol = scanner2.nextInt();
-                scanner2.nextLine();
+                int diaSol = scanner.nextInt();
+                scanner.nextLine();
 
                 System.out.println("Hora (HH): ");
-                int horaSol = scanner2.nextInt();
-                scanner2.nextLine();
+                int horaSol = scanner.nextInt();
+                scanner.nextLine();
 
                 System.out.println("Minuto (mm): ");
-                int minutoSol = scanner2.nextInt();
-                scanner2.nextLine();
+                int minutoSol = scanner.nextInt();
+                scanner.nextLine();
 
                 LocalDateTime fechaSol = LocalDateTime.of(anioSol, mesSol, diaSol, horaSol, minutoSol);
 
                 // Solicitar la fecha de cuando termina el evento (fecha final)
                 System.out.println("Ingrese la fecha de terminación de su reservación: ");
                 System.out.println("Año (AAAA): ");
-                anioSol = scanner2.nextInt();
-                scanner2.nextLine();
+                anioSol = scanner.nextInt();
+                scanner.nextLine();
 
                 System.out.println("Mes (MM): ");
-                mesSol = scanner2.nextInt();
-                scanner2.nextLine();
+                mesSol = scanner.nextInt();
+                scanner.nextLine();
 
                 System.out.println("Día (dd): ");
-                diaSol = scanner2.nextInt();
-                scanner2.nextLine();
+                diaSol = scanner.nextInt();
+                scanner.nextLine();
 
                 System.out.println("Hora (HH): ");
-                horaSol = scanner2.nextInt();
-                scanner2.nextLine();
+                horaSol = scanner.nextInt();
+                scanner.nextLine();
 
                 System.out.println("Minuto (mm): ");
-                minutoSol = scanner2.nextInt();
-                scanner2.nextLine();
+                minutoSol = scanner.nextInt();
+                scanner.nextLine();
 
                 LocalDateTime fechaFinSol = LocalDateTime.of(anioSol, mesSol, diaSol, horaSol, minutoSol);
 
                 // Preguntar si el evento es VIP
                 System.out.println("¿Su evento tiene características VIP? (y/n)");
-                String respuestaVIP = scanner2.nextLine().toLowerCase();
+                String respuestaVIP = scanner.nextLine().toLowerCase();
                 boolean w = true;
                 boolean vip = false;
                 do {
@@ -217,7 +212,7 @@ public class Main {
 
         } while (wmenu == true);
 
-        scanner2.close();
+        scanner.close();
 
         // Recibir una solicitud de reserva
         // Asignar un salón a un evento
