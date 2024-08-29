@@ -128,18 +128,30 @@ public class Main {
                 // Verificar que el salón se encuentre en el array
                 // Utilizo Do While para no utilizar for - break
                 boolean nombreIncorrecto = true;
-                int i = 0;
+                int i = -1;
                 int index = 0;
                 do {
+                    i++;
+                    if (i >= salones.length) {
+                        i = -1;
+                        System.out.println("Nombre incorrecto, vuelva a intentarlo. ");
+                        // Imprimir los salones
+                        for (int j = 0; j < salones.length; j++) {
+                            System.out.printf("Nombre: %s | Tipo: %s | Capacidad: %d | Costo: %d | Número: %d\n",
+                                    salones[j].getNombre(), salones[j].getTipo(), salones[j].getCapacidad(),
+                                    salones[j].getCosto(), j);
+                        }
+
+                        nombreSol = scanner.nextLine().toLowerCase();
+                        continue;
+                    }
+
                     if (nombreSol.equalsIgnoreCase(salones[i].getNombre())) {
                         nombreIncorrecto = false;
                         index = i;
                     }
-                    i++;
-                    if (i >= salones.length) {
-                        i = 0;
-                    }
-                } while (nombreIncorrecto == true && i < salones.length);
+
+                } while (nombreIncorrecto == true);
 
                 // Solicitar la fecha de reservación en formato LocalDateTime
                 System.out.println("Ingrese la fecha de reservación en el siguiente formato: ");
