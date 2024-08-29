@@ -188,7 +188,7 @@ public class Main {
                     } else if (respuestaVIP.equals("n")) {
                         vip = false;
                     } else {
-                        System.out.println("Valor ingresado incorreco, intente de nuevo.");
+                        System.out.println("Valor ingresado incorrecto, intente de nuevo.");
                         continue;
                     }
                     w = false;
