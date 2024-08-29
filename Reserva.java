@@ -1,10 +1,16 @@
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Reserva {
     private Salon salon;
     private Solicitud solicitud;
+    private List<Solicitud> solicitudes;
 
     public Reserva(Salon salon, Solicitud solicitud) {
         this.salon = salon;
         this.solicitud = solicitud;
+        this.solicitudes = new ArrayList<>();
     }
 
     public Salon getSalon() {
@@ -22,13 +28,27 @@ public class Reserva {
     public void setSolicitud(Solicitud solicitud) {
         this.solicitud = solicitud;
     }
-    public boolean  verificacion(Solicitud solicitud) {
-        boolean valido = true;
-
-
-        return valido;  
-
+    public boolean  verificacion(String encargado, String nombre, LocalDateTime inicio, LocalDateTime fin, Boolean vip, float duracion) {
+        Solicitud nuevaSolicitud = new Solicitud(encargado, nombre, inicio, fin, vip, duracion);
+        for (Solicitud reserva : solicitudes) {
+            if (reserva.coinciden(nuevaSolicitud)) {
+                return false; // Hay una coincidencia, por lo que no está disponible
+            }
+        }
+        return true; // No hay coincidencias, está disponible
     }
+    public void agregarReserva(String encargado, String nombre, LocalDateTime inicio, LocalDateTime fin, Boolean vip, float duracion) {
+        if (verificacion(encargado, nombre, inicio, fin, vip, duracion)) {
+            solicitudes.add(new Solicitud(encargado, nombre, inicio, fin, vip, duracion));
+            System.out.println("Reserva agregada con éxito.");
+        } else {
+            System.out.println("Error: La reserva coincide con una existente.");
+        }
+    }
+
+
+
+    
 
 
 }

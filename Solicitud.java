@@ -1,18 +1,21 @@
 import java.time.LocalDateTime;
 
 public class Solicitud {
+    
     // Atributos
     private String encargado;
     private String nombre;
-    private LocalDateTime fecha;
+    private LocalDateTime inicio;
+    private LocalDateTime fin;
     private boolean vip;
     private float duracion;
 
     // Constructor
-    public Solicitud(String encargado, String nombre, LocalDateTime fecha, boolean vip, float duracion) {
+    public Solicitud(String encargado, String nombre, LocalDateTime inicio, LocalDateTime fin, boolean vip, float duracion) {
         this.encargado = encargado;
         this.nombre = nombre;
-        this.fecha = fecha;
+        this.inicio = inicio;
+        this.fin = fin;
         this.vip = vip;
         this.duracion = duracion;
     }
@@ -34,12 +37,19 @@ public class Solicitud {
         this.nombre = nombre;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
+    public LocalDateTime getInicio() {
+        return this.inicio;
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public void setInicio(LocalDateTime fecha) {
+        this.inicio = fecha;
+    }
+    public LocalDateTime getFin() {
+        return this.fin;
+    }
+
+    public void setFin(LocalDateTime fecha) {
+        this.fin = fecha;
     }
 
     public boolean getVip() {
@@ -56,6 +66,9 @@ public class Solicitud {
 
     public void setDuracion(float duracion) {
         this.duracion = duracion;
+    }
+    public boolean coinciden(Solicitud otraReserva) {
+        return (inicio.isBefore(otraReserva.getFin()) && fin.isAfter(otraReserva.getInicio()));
     }
 
 }
