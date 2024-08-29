@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        //Inicializar el sistema e ingresar los datos de 4 salones
+        // Inicializar el sistema e ingresar los datos de 4 salones
         Salon[] salones = new Salon[4];
         Solicitud[] solicitudes = new Solicitud[10];
         ArrayList<Reserva> reservas = new ArrayList<>();
@@ -86,7 +86,8 @@ public class Main {
                     1) Imprimir información de Salones.
                     2) Recibir solicitud de reserva.
                     3) Asignar salón a un evento.
-                    4) Salir.
+                    4) Generar reporte de eventos.
+                    5) Salir.
                 """;
 
         int opcion;
@@ -96,7 +97,6 @@ public class Main {
 
             opcion = scanner.nextInt();
             scanner.nextLine();
-            
 
             // Verificar que el usuario ingrese una opción dentro de las posibles.
             if (opcion < 1 || opcion > 4) {
@@ -207,11 +207,11 @@ public class Main {
                 } while (w);
 
                 // Revisar si el salón es apto para un evento VIP
-                if (salones[index].getCapacidad() >= 500) {
-                    vip = true;
-                } else {
-                    System.out.println("Lo lamentamos, el salón no es apto para un evento VIP.");
-                    vip = false;
+                if (vip == true) {
+                    if (salones[index].getCapacidad() < 500) {
+                        System.out.println("Lo lamentamos, el salón no es apto para un evento VIP.");
+                        vip = false;
+                    }
                 }
 
                 // Generar Solicitud
@@ -222,41 +222,39 @@ public class Main {
                 solNum++;
 
             } else if (opcion == 3) { // Asignar Salón a un evento
-                // Verificar que no hayan reestricciones al asignar el salón
-                // es decir, revisar los horarios y las condiciones
-                // existe un objeto llamado nuevaSolicitud que contiene la informacion del
-                // evento
                 System.out.println("¿Cuál reserva desea agregar a un salón?");
                 int contador = 0;
-                
+
                 for (int j = 0; j < solicitudes.length; j++) {
                     Solicitud sol = solicitudes[j];
                     if (sol != null) { // Verificación de que la solicitud no sea null
                         System.out.printf("%d) Encargado: %s | Salón: %s | Fecha: %s - %s | VIP: %s\n",
-                            contador, sol.getEncargado(), sol.getNombre(), sol.getInicio(),
-                            sol.getFin(), sol.getVip());
+                                contador, sol.getEncargado(), sol.getNombre(), sol.getInicio(),
+                                sol.getFin(), sol.getVip());
                         contador++;
                     }
                 }
-                
+
                 int reservar = scanner.nextInt();
                 Solicitud evento = solicitudes[reservar];
                 Salon salonReserva = new Salon();
                 for (Salon salon : salones) {
-                    if (salon.getNombre().equals(evento.getNombre())){
+                    if (salon.getNombre().equals(evento.getNombre())) {
                         salonReserva = salon;
                         break;
                     }
                 }
-                
+
                 Reserva eventoReserva = new Reserva(salonReserva, evento);
-                if (eventoReserva.verificacion(evento.getEncargado(), evento.getNombre(), evento.getInicio(), evento.getFin(), evento.getVip()) == true) {
+                if (eventoReserva.verificacion(evento.getEncargado(), evento.getNombre(), evento.getInicio(),
+                        evento.getFin(), evento.getVip()) == true) {
                     System.out.println("Reserva realizada exitosamente.");
                     reservas.add(eventoReserva);
                 } else {
                     boolean controool = false;
                     while (controool == false) {
-                        System.out.println("Error la fecha y hora para el salón ya están tomadas. ¿Desea agregar el evento a la lista de espera? Si: 1 | No: 2");
+                        System.out.println(
+                                "Error la fecha y hora para el salón ya están tomadas. ¿Desea agregar el evento a la lista de espera? Si: 1 | No: 2");
                         int opcion2 = scanner.nextInt();
                         switch (opcion2) {
                             case 1:
@@ -264,7 +262,8 @@ public class Main {
                                 controool = true;
                                 break;
                             case 2:
-                                System.out.println("Entendido, no se guardaran los datos del evento en la lista de espera...");
+                                System.out.println(
+                                        "Entendido, no se guardaran los datos del evento en la lista de espera...");
                                 controool = true;
                                 break;
                             default:
@@ -273,11 +272,18 @@ public class Main {
                     }
                 }
 
-
-            }
-
-            // Salir
-            if (opcion == 4) {
+            } else if (opcion == 4) { // Imprimir listas de reservas
+                System.out.println("Lista de Reservas Confirmadas: ");
+                if (reservas.isEmpty()) {
+                    System.out.println("No hay reservas confirmadas.");
+                } else {
+                    for (Reserva reserva : reservas) {
+                        System.out.printf("Salón: %s | Encargado: %s | Fecha Inicio: %s | Fecha Fin: %s\n",
+                                reserva.getSalon().getNombre(), reserva.getSolicitud().getEncargado(),
+                                reserva.getSolicitud().getInicio(), reserva.getSolicitud().getFin());
+                    }
+                }
+            } else if (opcion == 5) { // Salir
                 System.out.println("Saliendo...");
                 wmenu = false;
             }
