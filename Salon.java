@@ -2,15 +2,13 @@ public class Salon {
 
     // Atributos
     private String nombre;
-    private int numero;
     private String tipo;
     private int capacidad;
     private int costo;
 
     // Constructor
-    public Salon(String nombre, int numero, String tipo, int capacidad, int costo) {
+    public Salon(String nombre, String tipo, int capacidad, int costo) {
         this.nombre = nombre;
-        this.numero = numero;
         this.tipo = tipo;
         this.capacidad = capacidad;
         this.costo = costo;
@@ -23,14 +21,6 @@ public class Salon {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
     }
 
     public String getTipo() {
