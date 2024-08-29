@@ -83,8 +83,8 @@ public class Main {
         String menu = """
                     Ingrese el número correspondiente al valor de la opción que desea ejecutar:
 
-                    1) Recibir solicitud de reserva.
-                    2) Imprimir información de Salones.
+                    1) Imprimir información de Salones.
+                    2) Recibir solicitud de reserva.
                     3) Asignar salón a un evento.
                     4) Generar reportes de eventos.
                     5) Salir.
@@ -105,8 +105,14 @@ public class Main {
                 continue;
             }
 
-            // Recibir solicitud de reserva
+            // Imprimir información de los salones disponibles
             if (opcion == 1) {
+                for (int i = 0; i < salones.length; i++) {
+                    System.out.printf("Nombre: %s | Tipo: %s | Capacidad: %d | Costo: %d | Número: %d\n",
+                            salones[i].getNombre(), salones[i].getTipo(), salones[i].getCapacidad(),
+                            salones[i].getCosto(), i);
+                }
+            } else if (opcion == 2) { // Recibir solicitud de reserva
                 System.out.print("Ingrese a nombre de quién se desea realizar la reservación: ");
                 String encargadoSol = scanner2.nextLine();
 
@@ -204,11 +210,13 @@ public class Main {
                 // Revisar si el salón es apto para un evento VIP
                 if (salones[index].getCapacidad() >= 500) {
                     vip = true;
+                } else {
+                    System.out.println("Lo lamentamos, el salón no es apto para un evento VIP.");
+                    vip = false;
                 }
 
                 // Generar Solicitud
                 Solicitud nuevaSolicitud = new Solicitud(encargadoSol, nombreSol, fechaSol, fechaFinSol, vip);
-
             }
 
             // Salir
