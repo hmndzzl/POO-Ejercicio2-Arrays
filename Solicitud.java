@@ -57,7 +57,8 @@ public class Solicitud {
     public void setVip(boolean vip) {
         this.vip = vip;
     }
-
+    
+    //Función para verificar que las fechas y horas no coincidan
     public boolean coinciden(Solicitud otraReserva) {
         return (inicio.isBefore(otraReserva.getFin()) && fin.isAfter(otraReserva.getInicio()));
     }

@@ -13,6 +13,12 @@ public class Salon {
         this.capacidad = capacidad;
         this.costo = costo;
     }
+    public Salon(){
+        this.nombre = "";
+        this.tipo = "";
+        this.capacidad = 0;
+        this.costo = 0;
+    }
 
     // Setters & Getters
     public String getNombre() {

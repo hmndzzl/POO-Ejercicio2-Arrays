@@ -8,6 +8,7 @@
 //
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -16,6 +17,8 @@ public class Main {
         //Inicializar el sistema e ingresar los datos de 4 salones
         Salon[] salones = new Salon[4];
         Solicitud[] solicitudes = new Solicitud[10];
+        ArrayList<Reserva> reservas = new ArrayList<>();
+        ArrayList<Reserva> espera = new ArrayList<>();
 
         boolean invalido = true;
         String tipoSalon = "";
@@ -112,7 +115,7 @@ public class Main {
                 System.out.print("Ingrese a nombre de quién se desea realizar la reservación: ");
                 String encargadoSol = scanner.nextLine();
 
-                System.out.print("Ingrese el nombre del salón que desea reservar de la siguiente lista: ");
+                System.out.println("Ingrese el nombre del salón que desea reservar de la siguiente lista: ");
                 // Imprimir los salones
                 for (int i = 0; i < salones.length; i++) {
                     System.out.printf("Nombre: %s | Tipo: %s | Capacidad: %d | Costo: %d | Número: %d\n",
@@ -223,6 +226,49 @@ public class Main {
                 // es decir, revisar los horarios y las condiciones
                 // existe un objeto llamado nuevaSolicitud que contiene la informacion del
                 // evento
+                System.out.println("¿Cuál reserva desea agregar a un salón?");
+                int contador = 0;
+                for (Solicitud sol : solicitudes){
+                    System.out.printf(contador + "|Número: %d | Encargado: %s | Salón: %s | Fecha: %s - %s | VIP: %s\n",
+                            contador, sol.getEncargado(), sol.getNombre(), sol.getInicio(),
+                            sol.getFin(), sol.getVip());
+                    contador++;
+                }
+                int reservar = scanner.nextInt();
+                Solicitud evento = solicitudes[reservar];
+                Salon salonReserva = new Salon();
+                for (Salon salon : salones) {
+                    if (salon.getNombre().equals(evento.getNombre())){
+                        salonReserva = salon;
+                        break;
+                    }
+                }
+                
+                Reserva eventoReserva = new Reserva(salonReserva, evento);
+                if (eventoReserva.verificacion(evento.getEncargado(), evento.getNombre(), evento.getInicio(), evento.getFin(), evento.getVip()) == true) {
+                    System.out.println("Reserva realizada exitosamente.");
+                    reservas.add(eventoReserva);
+                } else {
+                    boolean controool = false;
+                    while (controool = false) {
+                        System.out.println("Error la fecha y hora para el salón ya están tomadas. ¿Desea agregar el evento a la lista de espera? Si: 1 | No: 2");
+                        int opcion2 = scanner.nextInt();
+                        switch (opcion2) {
+                            case 1:
+                                espera.add(eventoReserva);
+                                controool = true;
+                                break;
+                            case 2:
+                                System.out.println("Entendido, no se guardaran los datos del evento en la lista de espera...");
+                                controool = true;
+                                break;
+                            default:
+                                System.out.println("Error, ingrese una opción válida.");
+                        }
+                    }
+                }
+
+
             }
 
             // Salir
@@ -234,11 +280,5 @@ public class Main {
         } while (wmenu == true);
 
         scanner.close();
-
-        // Recibir una solicitud de reserva
-        // Asignar un salón a un evento
-        // Implementar lógica para gestionar la lista de espera
-        // Implementar lófica para verificar conlfictos de horario
-        // Generar reportes de eventos
     }
 }
