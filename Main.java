@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Main {
@@ -7,75 +6,66 @@ public class Main {
         // // Inicializar el sistema e ingresar los datos de 4 salones
         Salon[] salones = new Salon[4];
 
-        // boolean invalido = true;
-        // String tipoSalon = "";
-        // String nombreSalon;
-        // int capSalon;
-        // int costoSalon;
+        boolean invalido = true;
+        String tipoSalon = "";
+        String nombreSalon;
+        int capSalon;
+        int costoSalon;
 
-        // // Crear una instancia de la clase Scanner
-        // Scanner scanner1 = new Scanner(System.in);
+        // Crear una instancia de la clase Scanner
+        Scanner scanner1 = new Scanner(System.in);
 
-        // // Mensaje para los empleados del centro (usuarios del sistema)
-        // System.out.println("A continuación deberá ingresar los datos de 4 salones
-        // disponibles para ser reservados: ");
+        // Mensaje para los empleados del centro (usuarios del sistema)
+        System.out.println("A continuación deberá ingresar los datos de 4 salones disponibles para ser reservados: ");
 
-        // for (int i = 1; i < 5; i++) {
-        // // Pedir el nombre del salón al usuario
-        // System.out.printf("Ingrese el nombre del salón %d: ", i);
-        // nombreSalon = scanner1.nextLine();
+        for (int i = 1; i < 5; i++) {
+            // Pedir el nombre del salón al usuario
+            System.out.printf("Ingrese el nombre del salón %d: ", i);
+            nombreSalon = scanner1.nextLine();
 
-        // // Pedir la capacidad del salón al usuario
-        // do {
-        // System.out.printf("Ingrese la capacidad máxima del salón %d: ", i);
-        // capSalon = scanner1.nextInt();
-        // scanner1.nextLine(); // Consumir el salto de línea restante
+            // Pedir la capacidad del salón al usuario
+            do {
+                System.out.printf("Ingrese la capacidad máxima del salón %d: ", i);
+                capSalon = scanner1.nextInt();
+                scanner1.nextLine(); // Consumir el salto de línea restante
 
-        // if (capSalon >= 500) {
-        // tipoSalon = "Grande";
-        // } else if (capSalon < 500 && capSalon > 200) {
-        // tipoSalon = "Mediano";
-        // } else if (capSalon <= 200 && capSalon > 0) {
-        // tipoSalon = "Pequeño";
-        // } else {
-        // System.out.println("Capacidad inválida. Vuelva a intentarlo.");
-        // continue;
-        // }
+                if (capSalon >= 500) {
+                    tipoSalon = "Grande";
+                } else if (capSalon < 500 && capSalon > 200) {
+                    tipoSalon = "Mediano";
+                } else if (capSalon <= 200 && capSalon > 0) {
+                    tipoSalon = "Pequeño";
+                } else {
+                    System.out.println("Capacidad inválida. Vuelva a intentarlo.");
+                    continue;
+                }
 
-        // invalido = false;
-        // } while (invalido);
+                invalido = false;
+            } while (invalido);
 
-        // invalido = true;
-        // do {
-        // System.out.printf("Ingrese el costo por hora del salón %d: ", i);
-        // costoSalon = scanner1.nextInt();
-        // scanner1.nextLine(); // Consumir el salto de línea restante
+            invalido = true;
+            do {
+                System.out.printf("Ingrese el costo por hora del salón %d: ", i);
+                costoSalon = scanner1.nextInt();
+                scanner1.nextLine(); // Consumir el salto de línea restante
 
-        // if (costoSalon < 0) {
-        // System.out.println("Costo inválido. Ingrese un valor positivo.");
-        // continue;
-        // }
+                if (costoSalon < 0) {
+                    System.out.println("Costo inválido. Ingrese un valor positivo.");
+                    continue;
+                }
 
-        // invalido = false;
-        // } while (invalido);
+                invalido = false;
+            } while (invalido);
 
-        // // Agregar los salones al Array
-        // salones[i - 1] = new Salon(nombreSalon, tipoSalon, capSalon, costoSalon); //
-        // El número de salón es su index
-        // }
-
-        // // Cerrar el scanner
-        // scanner1.close();
-
-        // //
-        // ---------------------------------------------MENÚ------------------------------------------------
-
-        // Imprimir los salones
-        for (int j = 0; j < salones.length; j++) {
-            System.out.printf("Nombre: %s | Tipo: %s | Capacidad: %d | Costo: %d | Número: %d\n",
-                    salones[j].getNombre(), salones[j].getTipo(), salones[j].getCapacidad(),
-                    salones[j].getCosto(), j);
+            // Agregar los salones al Array
+            salones[i - 1] = new Salon(nombreSalon, tipoSalon, capSalon, costoSalon); // El número de salón es su index
+            System.out.print("\n");
         }
+
+        // Cerrar el scanner
+        scanner1.close();
+
+        // ---------------------------------------------MENÚ------------------------------------------------
 
         // Realizar un menú
         boolean wmenu = true;
