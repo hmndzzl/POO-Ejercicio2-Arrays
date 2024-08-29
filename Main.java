@@ -1,10 +1,11 @@
 import java.util.Scanner;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
         // // Inicializar el sistema e ingresar los datos de 4 salones
-        // Salon[] salones = new Salon[4];
+        Salon[] salones = new Salon[4];
 
         // boolean invalido = true;
         // String tipoSalon = "";
@@ -69,13 +70,12 @@ public class Main {
         // //
         // ---------------------------------------------MENÚ------------------------------------------------
 
-        // // Imprimir los salones
-        // for (int j = 0; j < salones.length; j++) {
-        // System.out.printf("Nombre: %s | Tipo: %s | Capacidad: %d | Costo: %d |
-        // Número: %d\n",
-        // salones[j].getNombre(), salones[j].getTipo(), salones[j].getCapacidad(),
-        // salones[j].getCosto(), j);
-        // }
+        // Imprimir los salones
+        for (int j = 0; j < salones.length; j++) {
+            System.out.printf("Nombre: %s | Tipo: %s | Capacidad: %d | Costo: %d | Número: %d\n",
+                    salones[j].getNombre(), salones[j].getTipo(), salones[j].getCapacidad(),
+                    salones[j].getCosto(), j);
+        }
 
         // Realizar un menú
         boolean wmenu = true;
@@ -107,6 +107,107 @@ public class Main {
 
             // Recibir solicitud de reserva
             if (opcion == 1) {
+                System.out.print("Ingrese a nombre de quién se desea realizar la reservación: ");
+                String encargadoSol = scanner2.nextLine();
+
+                System.out.print("Ingrese el nombre del salón que desea reservar de la siguiente lista: ");
+                // Imprimir los salones
+                for (int i = 0; i < salones.length; i++) {
+                    System.out.printf("Nombre: %s | Tipo: %s | Capacidad: %d | Costo: %d | Número: %d\n",
+                            salones[i].getNombre(), salones[i].getTipo(), salones[i].getCapacidad(),
+                            salones[i].getCosto(), i);
+                }
+
+                String nombreSol = scanner2.nextLine().toLowerCase();
+
+                // Verificar que el salón se encuentre en el array
+                // Utilizo Do While para no utilizar for - break
+                boolean nombreIncorrecto = true;
+                int i = 0;
+                int index = 0;
+                do {
+                    if (nombreSol.equalsIgnoreCase(salones[i].getNombre())) {
+                        nombreIncorrecto = false;
+                        index = i;
+                    }
+                    i++;
+                    if (i >= salones.length) {
+                        i = 0;
+                    }
+                } while (nombreIncorrecto == true && i < salones.length);
+
+                // Solicitar la fecha de reservación en formato LocalDateTime
+                System.out.println("Ingrese la fecha de reservación en el siguiente formato: ");
+                System.out.println("Año (AAAA): ");
+                int anioSol = scanner2.nextInt();
+                scanner2.nextLine();
+
+                System.out.println("Mes (MM): ");
+                int mesSol = scanner2.nextInt();
+                scanner2.nextLine();
+
+                System.out.println("Día (dd): ");
+                int diaSol = scanner2.nextInt();
+                scanner2.nextLine();
+
+                System.out.println("Hora (HH): ");
+                int horaSol = scanner2.nextInt();
+                scanner2.nextLine();
+
+                System.out.println("Minuto (mm): ");
+                int minutoSol = scanner2.nextInt();
+                scanner2.nextLine();
+
+                LocalDateTime fechaSol = LocalDateTime.of(anioSol, mesSol, diaSol, horaSol, minutoSol);
+
+                // Solicitar la fecha de cuando termina el evento (fecha final)
+                System.out.println("Ingrese la fecha de terminación de su reservación: ");
+                System.out.println("Año (AAAA): ");
+                anioSol = scanner2.nextInt();
+                scanner2.nextLine();
+
+                System.out.println("Mes (MM): ");
+                mesSol = scanner2.nextInt();
+                scanner2.nextLine();
+
+                System.out.println("Día (dd): ");
+                diaSol = scanner2.nextInt();
+                scanner2.nextLine();
+
+                System.out.println("Hora (HH): ");
+                horaSol = scanner2.nextInt();
+                scanner2.nextLine();
+
+                System.out.println("Minuto (mm): ");
+                minutoSol = scanner2.nextInt();
+                scanner2.nextLine();
+
+                LocalDateTime fechaFinSol = LocalDateTime.of(anioSol, mesSol, diaSol, horaSol, minutoSol);
+
+                // Preguntar si el evento es VIP
+                System.out.println("¿Su evento tiene características VIP? (y/n)");
+                String respuestaVIP = scanner2.nextLine().toLowerCase();
+                boolean w = true;
+                boolean vip = false;
+                do {
+                    if (respuestaVIP.equals("y")) {
+                        vip = true;
+                    } else if (respuestaVIP.equals("n")) {
+                        vip = false;
+                    } else {
+                        System.out.println("Valor ingresado incorreco, intente de nuevo.");
+                        continue;
+                    }
+                    w = false;
+                } while (w);
+
+                // Revisar si el salón es apto para un evento VIP
+                if (salones[index].getCapacidad() >= 500) {
+                    vip = true;
+                }
+
+                // Generar Solicitud
+                Solicitud nuevaSolicitud = new Solicitud(encargadoSol, nombreSol, fechaSol, fechaFinSol, vip);
 
             }
 

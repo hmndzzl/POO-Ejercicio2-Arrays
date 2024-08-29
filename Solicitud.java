@@ -4,17 +4,17 @@ public class Solicitud {
     // Atributos
     private String encargado;
     private String nombre;
-    private LocalDateTime fecha;
+    private LocalDateTime fechaInicio;
+    private LocalDateTime fechaFin;
     private boolean vip;
-    private float duracion;
 
     // Constructor
-    public Solicitud(String encargado, String nombre, LocalDateTime fecha, boolean vip, float duracion) {
+    public Solicitud(String encargado, String nombre, LocalDateTime fechaInicio, LocalDateTime fechaFin, boolean vip) {
         this.encargado = encargado;
         this.nombre = nombre;
-        this.fecha = fecha;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
         this.vip = vip;
-        this.duracion = duracion;
     }
 
     // Setters & Getters
@@ -34,12 +34,20 @@ public class Solicitud {
         this.nombre = nombre;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
+    public LocalDateTime getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public void setFechaInicio(LocalDateTime fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public LocalDateTime getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(LocalDateTime fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
     public boolean getVip() {
@@ -48,14 +56,6 @@ public class Solicitud {
 
     public void setVip(boolean vip) {
         this.vip = vip;
-    }
-
-    public float getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(float duracion) {
-        this.duracion = duracion;
     }
 
 }
