@@ -28,8 +28,8 @@ public class Reserva {
     public void setSolicitud(Solicitud solicitud) {
         this.solicitud = solicitud;
     }
-    public boolean  verificacion(String encargado, String nombre, LocalDateTime inicio, LocalDateTime fin, Boolean vip, float duracion) {
-        Solicitud nuevaSolicitud = new Solicitud(encargado, nombre, inicio, fin, vip, duracion);
+    public boolean  verificacion(String encargado, String nombre, LocalDateTime inicio, LocalDateTime fin, Boolean vip) {
+        Solicitud nuevaSolicitud = new Solicitud(encargado, nombre, inicio, fin, vip);
         for (Solicitud reserva : solicitudes) {
             if (reserva.coinciden(nuevaSolicitud)) {
                 return false; // Hay una coincidencia, por lo que no está disponible
@@ -37,9 +37,9 @@ public class Reserva {
         }
         return true; // No hay coincidencias, está disponible
     }
-    public void agregarReserva(String encargado, String nombre, LocalDateTime inicio, LocalDateTime fin, Boolean vip, float duracion) {
-        if (verificacion(encargado, nombre, inicio, fin, vip, duracion)) {
-            solicitudes.add(new Solicitud(encargado, nombre, inicio, fin, vip, duracion));
+    public void agregarReserva(String encargado, String nombre, LocalDateTime inicio, LocalDateTime fin, Boolean vip) {
+        if (verificacion(encargado, nombre, inicio, fin, vip)) {
+            solicitudes.add(new Solicitud(encargado, nombre, inicio, fin, vip));
             System.out.println("Reserva agregada con éxito.");
         } else {
             System.out.println("Error: La reserva coincide con una existente.");

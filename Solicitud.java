@@ -8,16 +8,14 @@ public class Solicitud {
     private LocalDateTime inicio;
     private LocalDateTime fin;
     private boolean vip;
-    private float duracion;
 
     // Constructor
-    public Solicitud(String encargado, String nombre, LocalDateTime inicio, LocalDateTime fin, boolean vip, float duracion) {
+    public Solicitud(String encargado, String nombre, LocalDateTime inicio, LocalDateTime fin, boolean vip) {
         this.encargado = encargado;
         this.nombre = nombre;
         this.inicio = inicio;
         this.fin = fin;
         this.vip = vip;
-        this.duracion = duracion;
     }
 
     // Setters & Getters
@@ -60,13 +58,6 @@ public class Solicitud {
         this.vip = vip;
     }
 
-    public float getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(float duracion) {
-        this.duracion = duracion;
-    }
     public boolean coinciden(Solicitud otraReserva) {
         return (inicio.isBefore(otraReserva.getFin()) && fin.isAfter(otraReserva.getInicio()));
     }
