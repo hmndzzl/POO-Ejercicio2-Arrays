@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
         // // Inicializar el sistema e ingresar los datos de 4 salones
         Salon[] salones = new Salon[4];
+        Solicitud[] solicitudes = new Solicitud[10];
 
         boolean invalido = true;
         String tipoSalon = "";
@@ -83,6 +84,7 @@ public class Main {
 
             opcion = scanner.nextInt();
             scanner.nextLine();
+            int solNum = 0; // Index para el array de solicitudes
 
             // Verificar que el usuario ingrese una opción dentro de las posibles.
             if (opcion < 1 || opcion > 5) {
@@ -202,6 +204,16 @@ public class Main {
 
                 // Generar Solicitud
                 Solicitud nuevaSolicitud = new Solicitud(encargadoSol, nombreSol, fechaSol, fechaFinSol, vip);
+
+                solicitudes[solNum] = nuevaSolicitud;
+
+                solNum++;
+
+            } else if (opcion == 3) { // Asignar Salón a un evento
+                // Verificar que no hayan reestricciones al asignar el salón
+                // es decir, revisar los horarios y las condiciones
+                // existe un objeto llamado nuevaSolicitud que contiene la informacion del
+                // evento
             }
 
             // Salir
